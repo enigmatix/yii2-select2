@@ -8,7 +8,7 @@ using an ActiveForm.
 
 This widget is intentionally light on proprietary code, and instead 
 favours existing Yii2 objects, classes and helpers where they are 
-provided.  It also provides a passthru mechanism so you can use the full 
+provided.  It also provides a passthrough mechanism so you can use the full 
 Select2 range of options without having to rely on support being 
 manually added to this php widget.
 
@@ -25,7 +25,7 @@ original Yii2 installation instructions
 INSTALLATION
 ------------
 
-* `composer  require enigmatix/yii2select "*"`
+    composer  require enigmatix/yii2-select "*"
 
 GETTING STARTED
 ---------------
