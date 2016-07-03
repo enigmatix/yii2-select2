@@ -3,6 +3,7 @@ namespace enigmatix\yii2select;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Inflector;
 use yii\helpers\Json;
 use yii\web\JsExpression;
 use yii\widgets\InputWidget;
@@ -80,7 +81,7 @@ class Select2 extends InputWidget
         Select2Asset::register($this->view);
         $fieldName  = Html::getAttributeName($this->attribute);
         $value      = $this->model->$fieldName;
-        $label      = $this->label == null ? $value : $this->label;
+        $label      = $this->label == null ? $value : Inflector::humanize($this->label);
         $valueList  = ArrayHelper::merge($this->list, [$value => $label]);
 
         echo Html::activeDropDownList($this->model, $this->attribute,$valueList,['id' => $this->options['id'],'class' =>'form-control','value' => $value]);
