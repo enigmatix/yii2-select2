@@ -24,7 +24,7 @@ original Yii2 installation instructions
 INSTALLATION
 ------------
 
-* `composer require enigmatix/yii2-select2`
+* `composer  require enigmatix/yii2select "*"`
 
 GETTING STARTED
 ---------------

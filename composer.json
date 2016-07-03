@@ -1,5 +1,5 @@
 {
-    "name": "enigmatix/yii2-select2",
+    "name": "enigmatix/yii2select",
     "description": "Yii2 wrapper for the Select2 javascript widget",
     "keywords": [
         "yii2",
@@ -24,7 +24,7 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "enigmatix\\yii2-select2\\": ""
+            "enigmatix\\yii2select\\": ""
         }
     }
 }
