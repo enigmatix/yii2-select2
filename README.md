@@ -29,13 +29,12 @@ INSTALLATION
 GETTING STARTED
 ---------------
 
-`
-use enigmatix/yii2select/Select2;
+    use enigmatix/yii2select/Select2;
 
-$dropdownList = ['Yes' => 'Yes', 'No'];
+    $dropdownList = ['Yes' => 'Yes', 'No'];
 
- <?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
- ['list' => $dropdownList]) ?>`
+    <?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
+       ['list' => $dropdownList]) ?>
 
 ADVANCED USAGE
 --------------
@@ -46,19 +45,16 @@ yii\web\JsExpression to ensure the resulting config is encoded correctly.
 See http://www.yiiframework.com/doc-2.0/yii-web-jsexpression.html for 
 more details: eg
 
-`
-$ajaxDataFunction = new JsExpression("function (term, page) {return {q: term,};}")
+    $ajaxDataFunction = new JsExpression("function (term, page) {return {q: term,};}")
 
-<?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
- [
-    'list' => $dropdownList
-    'pluginOptions => [
-        'ajax' => [
-            'data => $ajaxDataFunction,            
-       ]
- ]) ?>`
-
-`
+    <?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
+     [
+        'list' => $dropdownList
+        'pluginOptions => [
+            'ajax' => [
+                'data => $ajaxDataFunction,            
+           ]
+     ]) ?>
 
 USING NATIVE SELECT2 FEATURES
 -----------------------------
