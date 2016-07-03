@@ -34,7 +34,7 @@ GETTING STARTED
 
     $dropdownList = ['Yes' => 'Yes', 'No'];
 
-    <?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
+    <?= $form->field($model, 'your_field_name')->widget(Select2::className(), 
        ['list' => $dropdownList]) ?>
 
 ADVANCED USAGE
@@ -48,7 +48,7 @@ more details: eg
 
     $ajaxDataFunction = new JsExpression("function (term, page) {return {q: term,};}")
 
-    <?= $form->field($model, 'primary_tag')->widget(Select2::className(), 
+    <?= $form->field($model, 'your_field_name')->widget(Select2::className(), 
      [
         'list' => $dropdownList
         'pluginOptions => [
