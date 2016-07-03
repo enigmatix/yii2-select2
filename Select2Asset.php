@@ -12,17 +12,14 @@ use yii\web\AssetBundle;
 
 class Select2Asset extends AssetBundle
 {
-    public $sourcePath = '@vendor/enigmatix/yii2-widgets';
+    public $sourcePath = '@vendor/bower/select2/dist';
     public $css = [
-        'select2.min.css',
-        'select2-bootstrap.css'
+        'css/select2.min.css',
     ];
     public $js = [
-        'select2.full.min.js',
+        'js/select2.full.min.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset'
-//        'yii\web\YiiAsset',
-//        'yii\bootstrap\BootstrapAsset',
     ];
 }
