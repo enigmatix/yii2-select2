@@ -16,6 +16,7 @@ REQUIREMENTS
 ------------
 
 The minimum requirement by this library is:
+
 1. your Web server supports PHP 5.4.0
 2. you have Yii2 installed
 3. You have correctly configured the composer fxp plugin as per the 
