@@ -1,0 +1,30 @@
+{
+    "name": "enigmatix/yii2-select2",
+    "description": "Yii2 wrapper for the Select2 javascript widget",
+    "keywords": [
+        "yii2",
+        "framework",
+        "select2",
+        "widget",
+        "form",
+        "ActiveForm",
+        "ActiveField"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joel Small",
+            "email": "joel.small@biscon.com.au"
+        }
+    ],
+    "require": {
+        "bower-asset/select2": "4.*",
+        "php": ">=5.4.0"
+    },
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "enigmatix\\yii2-select2\\": ""
+        }
+    }
+}
