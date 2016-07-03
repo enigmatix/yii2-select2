@@ -85,7 +85,7 @@ class Select2 extends InputWidget
 
         echo Html::activeDropDownList($this->model, $this->attribute,$valueList,['id' => $this->options['id'],'class' =>'form-control','value' => $value]);
 
-        $script = "$(\"#{$this->options['id']}\").select2({$this->options});";
+        $script = "$(\"#{$this->options['id']}\").select2({$this->getOptions()});";
         $this->view->registerJs($script);
     }
 
