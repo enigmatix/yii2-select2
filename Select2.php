@@ -81,7 +81,7 @@ class Select2 extends InputWidget
         Select2Asset::register($this->view);
         $fieldName  = Html::getAttributeName($this->attribute);
         $value      = $this->model->$fieldName;
-        $label      = $this->label == null ? $value : Inflector::humanize($this->label);
+        $label      = $this->getLabel($value);
         $valueList  = ArrayHelper::merge($this->list, [$value => $label]);
 
         echo Html::activeDropDownList($this->model, $this->attribute,$valueList,['id' => $this->options['id'],'class' =>'form-control','value' => $value]);
@@ -97,6 +97,7 @@ class Select2 extends InputWidget
      *
      * @return string
      */
+
     protected function getOptions()
     {
         $options = ArrayHelper::merge([
@@ -108,6 +109,27 @@ class Select2 extends InputWidget
         ],$this->pluginOptions);
 
         return Json::encode($options);
+    }
+
+    /**
+     * Looks for a label for the current data value, in the order of:
+     *
+     * 1. manually specified label
+     * 2. data label as per list array
+     * 3. a humanized version of the data value
+     *
+     * @param string $value
+     * @return mixed|string
+     */
+
+    protected function getLabel($value){
+        if($this->label == null){
+            $label      = ArrayHelper::getValue($this->list, $value);
+        }else{
+            $label      = $this->label == null ? Inflector::humanize($value) : $this->label;
+        }
+        return $label == null ? Inflector::humanize($value) : $label;
+
     }
 
     /**
