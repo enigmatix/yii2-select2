@@ -1,6 +1,7 @@
 <?php
 namespace enigmatix\yii2select;
 
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
@@ -18,8 +19,9 @@ use yii\widgets\InputWidget;
  * the Select2 library, so you can use the original library to it's full potential without being prevented by needing
  * duplicated support within this class.
  *
- * @property array $ajaxParams
+ * @property array  $ajaxParams
  * @property string $resultQuery
+ * @property string $displayValue
  */
 class Select2 extends InputWidget
 {
@@ -79,15 +81,48 @@ class Select2 extends InputWidget
     public function run()
     {
         Select2Asset::register($this->view);
-        $fieldName  = Html::getAttributeName($this->attribute);
-        $value      = $this->model->$fieldName;
-        $label      = $this->getLabel($value);
-        $valueList  = ArrayHelper::merge($this->list, [$value => $label]);
+        $label      = $this->getLabel($this->displayValue);
+        $valueList  = ArrayHelper::merge(
+            $this->list,
+            [$this->displayValue => $label]);
 
-        echo Html::activeDropDownList($this->model, $this->attribute,$valueList,['id' => $this->options['id'],'class' =>'form-control','value' => $value]);
+        echo Html::activeDropDownList(
+            $this->model, 
+            $this->attribute,
+            $valueList,
+            [
+                'id'    => $this->options['id'],
+                'class' =>'form-control',
+                'value' => $this->displayValue,
+            ]
+        );
 
         $script = "$(\"#{$this->options['id']}\").select2({$this->getOptions()});";
         $this->view->registerJs($script);
+    }
+
+    public function getDisplayValue(){
+
+        if($this->value != null)
+            return $this->value;
+
+        $fieldName = $this->fieldName;
+
+        /* Early exit for situations where the field is actually an array.  This widget cannot interpret any non-string value */
+        if($this->attribute != $fieldName)
+            return null;
+
+        $value = $this->model->$fieldName;
+
+        if(is_array($value)){
+            throw new InvalidConfigException("$fieldName must be a string, array found");
+        }
+        return $value;
+
+    }
+
+    public function getFieldName(){
+        return        Html::getAttributeName($this->attribute);
     }
 
     /**
@@ -126,7 +161,7 @@ class Select2 extends InputWidget
         if($this->label == null){
             $label      = ArrayHelper::getValue($this->list, $value);
         }else{
-            $label      = $this->label == null ? Inflector::humanize($value) : $this->label;
+            $label      = $this->label;
         }
         return $label == null ? Inflector::humanize($value) : $label;
 
