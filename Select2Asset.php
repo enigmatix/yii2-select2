@@ -6,7 +6,7 @@
  * Time: 5:29 PM
  */
 
-namespace enigmatix\yii2select;
+namespace enigmatix\select2;
 
 use yii\web\AssetBundle;
 

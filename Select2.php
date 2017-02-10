@@ -1,5 +1,5 @@
 <?php
-namespace enigmatix\yii2select;
+namespace enigmatix\select2;
 
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
