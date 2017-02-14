@@ -56,12 +56,6 @@ class Select2 extends InputWidget
     public $escapeMarkup        = 'function (m) { return m; }';
 
     /**
-     * @var string A function that populates the dropdown list based off data returned from $this->url.
-     */
-
-    public $createSearchChoice  = 'function (term){return {id: term, text: term};}';
-
-    /**
      * @var string For complex forms, you can ascribe a prefix, if required, to the value being stored in the field.
      * This can help when needing to differentiate two otherwise identical fields.
      */
@@ -74,6 +68,8 @@ class Select2 extends InputWidget
      */
 
     public $list                = [];
+    public $idField = 'id';
+    public $labelField = 'text';
 
     /**
      * @inheritdoc
@@ -139,7 +135,6 @@ class Select2 extends InputWidget
             'placeholder'           => $this->placeholder,
             'ajax'                  => $this->ajaxParams,
             'escapeMarkup'          => new JsExpression($this->escapeMarkup),
-            'createSearchChoice'    => new JsExpression($this->createSearchChoice),
             'dropdownAutoWidth'     => 'true'
         ],$this->pluginOptions);
 
@@ -178,8 +173,6 @@ class Select2 extends InputWidget
         return [
             'url'           => $this->url,
             'dataType'      => 'json',
-            'data'          => new JsExpression("function (term, page) {return {q: term,};}"),
-            'results'       => new JsExpression($this->resultQuery),
         ];
     }
 
