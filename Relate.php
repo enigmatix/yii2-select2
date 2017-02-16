@@ -7,6 +7,7 @@
  */
 namespace enigmatix\select2;
 
+use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\helpers\StringHelper;
@@ -34,22 +35,31 @@ class Relate extends Select2
     {
         if($this->url == null)
             $this->url = $this->generateUrl();
+
         parent::run();
     }
 
-    public function retrieveValue($fieldName){
-        $value = parent::retrieveValue($fieldName);
+    public function retrieveValue(){
+        $value = $this->getDisplayValue();
         return $this->valuePrefix . $value;
     }
 
+    protected function getDisplayValue() {
+
+        return $this->getFieldModel()->name;
+
+    }
+
     protected function getController(){
+
 
         if($this->controller != null){
             return $this->controller;
         }
 
-        $field      = $this->fieldModel != null ?: $this->getFieldModel();
+        $field      = $this->getFieldModel();
         if(method_exists($field, 'getController')){
+
             return $field->getController();
         }else{
             $className = StringHelper::basename($field::className());
@@ -63,25 +73,31 @@ class Relate extends Select2
     }
 
     protected function getFieldModel(){
-        $model = $this->model;
-        $field = str_replace('_id', '', $this->getFieldName());
+
+        if($this->fieldModel != null)
+            return $this->model;
+
+        $fieldName  = $this->getFieldName();
+        $field      = rtrim(str_replace('id', '', $fieldName), '_');
 
         $activeQueryName = 'get' . Inflector::camelize($field);
-        if(!method_exists($model, $activeQueryName)){
-            $activeQueryName .= 's';
-            if(!method_exists($model, $activeQueryName))
-                throw new InvalidConfigException("No controller string, url string or fieldModel supplied in widget config, and default method $activeQueryName does not exist in " . $this->model->className());
-        }
 
+        if(!method_exists($this->model, $activeQueryName))
+            throw new InvalidConfigException("fieldModel not supplied in config, and default method $activeQueryName "
+                . "does not exist in " . $this->model->className());
 
-        /* @var \yii\db\ActiveQuery $activeQuery */
+        if($this->model->$fieldName != null){
 
-        $activeQuery            = $model->$activeQueryName();
-        $fieldModelClassName    = $activeQuery->modelClass;
+            $propertyName   = Inflector::variablize($field);
 
-        if($this->value != null){
-            return $fieldModelClassName::findOne($this->value);
+            return $this->model->$propertyName;
+
         } else {
+
+            /* @var \yii\db\ActiveQuery $activeQuery */
+
+            $activeQuery            = $model->$activeQueryName();
+            $fieldModelClassName    = $activeQuery->modelClass;
 
             return new $fieldModelClassName;
         }

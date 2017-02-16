@@ -76,6 +76,7 @@ class Select2 extends InputWidget
      */
     public function run()
     {
+
         Select2Asset::register($this->view);
         $label      = $this->getLabel($this->displayValue);
         $valueList  = ArrayHelper::merge(
@@ -95,12 +96,15 @@ class Select2 extends InputWidget
 
         $script = "$(\"#{$this->options['id']}\").select2({$this->getOptions()});";
         $this->view->registerJs($script);
+
+        $this->label = $this->getDisplayValue();
+
     }
 
-    public function getDisplayValue(){
+    protected function getDisplayValue(){
 
-        if($this->value != null)
-            return $this->value;
+        if($this->label != null)
+            return $this->label;
 
         $fieldName = $this->fieldName;
 
