@@ -84,13 +84,14 @@ class Select2 extends InputWidget
     {
 
         Select2Asset::register($this->view);
-        $label      = $this->getLabel($this->displayValue);
+        $value      = $this->displayValue;
+        $label      = $this->getCurrentLabel();
         $valueList  = ArrayHelper::merge(
             $this->list,
-            [$this->displayValue => $label]);
+            [$value => $label]);
 
         echo Html::activeDropDownList(
-            $this->model, 
+            $this->model,
             $this->attribute,
             $valueList,
             $this->getFieldOptions()
@@ -101,13 +102,14 @@ class Select2 extends InputWidget
 
         $this->label = $this->getDisplayValue();
 
+        parent::run();
+
     }
 
     protected function getFieldOptions(){
         return ArrayHelper::merge([
                 'id'    => $this->options['id'],
                 'class' =>'form-control',
-                'value' => $this->displayValue,
             ],
             $this->fieldOptions
         );
@@ -115,12 +117,10 @@ class Select2 extends InputWidget
 
     protected function getDisplayValue(){
 
-        if($this->label != null)
-            return $this->label;
-
         $fieldName = $this->fieldName;
 
         /* Early exit for situations where the field is actually an array.  This widget cannot interpret any non-string value */
+
         if($this->attribute != $fieldName)
             return null;
 
@@ -129,6 +129,7 @@ class Select2 extends InputWidget
         if(is_array($value)){
             throw new InvalidConfigException("$fieldName must be a string, array found");
         }
+
         return $value;
 
     }

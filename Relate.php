@@ -44,7 +44,7 @@ class Relate extends Select2
         return $this->valuePrefix . $value;
     }
 
-    protected function getDisplayValue() {
+    protected function getCurrentLabel() {
 
         return $this->getFieldModel()->name;
 
