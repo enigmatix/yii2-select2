@@ -37,6 +37,22 @@ GETTING STARTED
     <?= $form->field($model, 'your_field_name')->widget(Select2::className(), 
        ['list' => $dropdownList]) ?>
 
+MULTIPLE SELECTION BOX
+----------------------
+
+You can set additional attributes for the 'select' html element by passing 
+values into the 'fieldOptions'
+
+    <?= $form->field($model, 'your_field_name')->widget(Select2::className(), 
+       [
+            'list' => $dropdownList,
+            'fieldOptions' => [
+                'multiple' => true
+            ]
+       ]) ?>
+
+
+
 ADVANCED USAGE
 --------------
 

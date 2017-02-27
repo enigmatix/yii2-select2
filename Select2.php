@@ -32,6 +32,12 @@ class Select2 extends InputWidget
     public $url;
 
     /**
+     * @var array Option values that are passed through to the html <select> entity as attributes.
+     */
+
+    public $fieldOptions       = [];
+
+    /**
      * @var array Option values that are passed through to the .select2() javascript call.
      */
 
@@ -87,11 +93,7 @@ class Select2 extends InputWidget
             $this->model, 
             $this->attribute,
             $valueList,
-            [
-                'id'    => $this->options['id'],
-                'class' =>'form-control',
-                'value' => $this->displayValue,
-            ]
+            $this->getFieldOptions()
         );
 
         $script = "$(\"#{$this->options['id']}\").select2({$this->getOptions()});";
@@ -99,6 +101,16 @@ class Select2 extends InputWidget
 
         $this->label = $this->getDisplayValue();
 
+    }
+
+    protected function getFieldOptions(){
+        return ArrayHelper::merge([
+                'id'    => $this->options['id'],
+                'class' =>'form-control',
+                'value' => $this->displayValue,
+            ],
+            $this->fieldOptions
+        );
     }
 
     protected function getDisplayValue(){
