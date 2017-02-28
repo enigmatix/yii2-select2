@@ -10,6 +10,7 @@ namespace enigmatix\select2;
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\helpers\Inflector;
@@ -30,23 +31,29 @@ class Relate extends Select2
     /**
      * @var Model
      */
-    public $fieldModel;
-    public function run()
-    {
+    protected $fieldModel;
+
+    public function init() {
+        parent::init();
+
+        if($this->fieldModel == null)
+            $this->fieldModel = $this->getFieldModel();
+
+        if($this->value == null)
+            $this->value        = $this->fieldModel->id;
+
+        if($this->list == null)
+            $this->list         = [$this->value => $this->getLabel()];
+
         if($this->url == null)
             $this->url = $this->generateUrl();
 
-        parent::run();
     }
 
-    public function retrieveValue(){
-        $value = $this->getDisplayValue();
-        return $this->valuePrefix . $value;
-    }
 
-    protected function getCurrentLabel() {
+    protected function getLabel() {
 
-        return $this->getFieldModel()->name;
+        return $this->fieldModel->name;
 
     }
 
@@ -75,7 +82,7 @@ class Relate extends Select2
     protected function getFieldModel(){
 
         if($this->fieldModel != null)
-            return $this->model;
+            return $this->fieldModel;
 
         $fieldName  = $this->getFieldName();
         $field      = rtrim(str_replace('id', '', $fieldName), '_');
@@ -101,6 +108,8 @@ class Relate extends Select2
 
             return new $fieldModelClassName;
         }
+
+
 
     }
 
