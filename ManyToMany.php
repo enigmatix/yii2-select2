@@ -53,10 +53,15 @@ class ManyToMany extends Relate
         return ArrayHelper::merge(parent::getFieldOptions(), ['multiple' => true]);
     }
 
+    protected function renderLabel(){
+        $fieldName = $this->getFieldName();
+        return Html::label(Inflector::titleize($fieldName), $this->id);
+    }
+
     protected function renderfield() {
 
 
-        return Html::dropDownList(
+        return $this->renderLabel() . Html::dropDownList(
             $this->name,
             $this->value,
             $this->list,

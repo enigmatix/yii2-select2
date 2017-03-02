@@ -80,11 +80,12 @@ class Select2 extends InputWidget
 
         $script = "$(\"#{$this->options['id']}\").select2({$this->getOptions()});";
         $this->view->registerJs($script);
-
-        echo $this->renderField();
+        echo Html::tag('div',
+        $this->renderField(),
+    ['class' => 'form-group']);
 
     }
-
+    
     protected function renderfield(){
 
         return Html::activeDropDownList(
