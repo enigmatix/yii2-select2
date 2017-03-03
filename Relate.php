@@ -103,7 +103,7 @@ class Relate extends Select2
 
             /* @var \yii\db\ActiveQuery $activeQuery */
 
-            $activeQuery            = $model->$activeQueryName();
+            $activeQuery            = $this->model->$activeQueryName();
             $fieldModelClassName    = $activeQuery->modelClass;
 
             return new $fieldModelClassName;
