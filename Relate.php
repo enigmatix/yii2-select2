@@ -71,7 +71,7 @@ class Relate extends Select2
         }else{
             $className = StringHelper::basename($field::className());
 
-            return Inflector::slug(Inflector::titleize($className));
+            return Inflector::slug(Inflector::pluralize($className));
         }
     }
 
