@@ -40,7 +40,7 @@ class Relate extends Select2
             $this->fieldModel = $this->getFieldModel();
 
         if($this->value == null)
-            $this->value        = $this->fieldModel->id;
+            $this->value        = ArrayHelper::getValue($this->fieldModel, 'id');
 
         if($this->list == null)
             $this->list         = [$this->value => $this->getLabel()];
@@ -53,7 +53,7 @@ class Relate extends Select2
 
     protected function getLabel() {
 
-        return $this->fieldModel->name;
+        return ArrayHelper::getValue($this->fieldModel, 'name');
 
     }
 
