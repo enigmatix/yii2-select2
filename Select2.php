@@ -122,7 +122,7 @@ class Select2 extends InputWidget
         $options = ArrayHelper::merge([
             'placeholder'           => $this->placeholder,
             'escapeMarkup'          => new JsExpression($this->escapeMarkup),
-            'dropdownAutoWidth'     => 'true'
+            'dropdownAutoWidth'     => 'true',
         ],
             $this->url != null ? ['ajax' => $this->getAjaxParams()] : [],
             $this->pluginOptions);

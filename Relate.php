@@ -109,8 +109,7 @@ class Relate extends Select2
             return new $fieldModelClassName;
         }
 
-
-
     }
+
 
 }
