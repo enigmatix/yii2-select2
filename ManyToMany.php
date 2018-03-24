@@ -54,6 +54,9 @@ class ManyToMany extends Relate
     }
 
     protected function renderLabel(){
+        if($this->label !== null){
+            return Html::label($this->label, $this->id);
+        }
         $fieldName = $this->getFieldName();
         return Html::label(Inflector::titleize($fieldName), $this->id);
     }
