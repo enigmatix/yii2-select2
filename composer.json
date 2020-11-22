@@ -18,8 +18,10 @@
         }
     ],
     "require": {
-        "npm-asset/select2": "*",
         "php": ">=5.4.0"
+    },
+    "provides": {
+        "npm-asset/select2": "*"
     },
     "minimum-stability": "stable",
     "autoload": {
