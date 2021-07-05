@@ -18,9 +18,7 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0"
-    },
-    "provides": {
+        "php": ">=5.4.0",
         "npm-asset/select2": "*"
     },
     "minimum-stability": "stable",
@@ -28,5 +26,11 @@
         "psr-4": {
             "enigmatix\\select2\\": ""
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
 }
